@@ -1,0 +1,342 @@
+/* ===========================
+   Root Variables
+=========================== */
+:root {
+
+	/* Paradigma Digital Colors */
+	--glitch-dark-color: #181f2c;
+	--glitch-light-color: #ffcdcc;
+	--glitch-action-color: #ff4745;
+
+	/* Background Animation Variables */
+	--bg-item-size: 600px;
+	--bg-item-speed: 4s;
+	--bg-item-speed-scale: calc(0.75 * var(--bg-item-speed));
+	--bg-item-speed-move: calc(1 * var(--bg-item-speed));
+	--bg-item-speed-rotate: calc(2 * var(--bg-item-speed));
+	--bg-item-opacity: 0.5;
+	--bg-item-blur: 80px;
+	--bg-item-color-1: var(--glitch-dark-color);
+	--bg-item-color-2: var(--glitch-light-color);
+	--bg-item-color-3: var(--glitch-action-color);
+}
+
+/* ===========================
+   Base Elements
+=========================== */
+html {
+	overflow: hidden;
+	color-scheme: dark light;
+	background-color: #00040a;
+	block-size: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	overflow: hidden;
+	padding: 20px;
+	font-family: system-ui, sans-serif;
+	line-height: 1.375;
+	margin: 0;
+	color: #ffffff;
+	font-size: 14px;
+}
+
+h2 {
+	font-size: 18px;
+	font-weight: 400;
+}
+
+label {
+	margin: 5px 0;
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	font-size: 0.9rem;
+	padding: 6px 0;
+	cursor: pointer;
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+input[type="radio"]:checked+.opcion-radio {
+	background-color: var(--glitch-action-color);
+	color: #fff;
+	font-weight: bold;
+	border-color: var(--glitch-action-color);
+	transform: scale(1.05);
+}
+
+input[type="text"] {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	border: 1px solid var(--glitch-light-color);
+	border-radius: 7.5px;
+	padding: 9px 12px;
+	color: #ffffff;
+	font-size: 0.9rem;
+	min-height: 36px;
+	transition: all 0.3s ease;
+	margin-top: 5px;
+}
+
+input[type="text"]::placeholder {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+input[type="text"]:focus {
+	border-color: var(--glitch-action-color);
+	box-shadow: 0 0 6px var(--glitch-action-color);
+	outline: none;
+}
+
+button {
+	width: 100%;
+	margin-top: 10px;
+	background-color: var(--glitch-action-color);
+	color: #fff;
+	font-weight: 600;
+	border: none;
+	border-radius: 9px;
+	min-height: 32px;
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button:hover {
+	background-color: #ff5c5a;
+}
+
+button:active {
+	transform: scale(0.97);
+}
+
+button:focus-visible {
+	outline: 2.5px solid #fff;
+	outline-offset: 2.5px;
+}
+
+button#runCheck {
+	margin-top: 30px;
+}
+
+button#resetCheck {
+	background-color: #656565;
+}
+
+button#resetCheck:hover {
+	background-color: #5c5c5c;
+}
+
+#logo {
+	display: block;
+	width: calc(100% - 10px);
+	height: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.logo-paradigma {
+	display: block;
+	text-align: right;
+	height: auto;
+	margin-top: 20px;
+}
+
+.logo-paradigma img {
+	width: 150px;
+	height: auto;
+}
+
+
+/* ===========================
+   Background Animation
+=========================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+	.bg,
+	.bg * {
+		animation: none !important;
+		background-color: #00040a;
+	}
+}
+
+.bg {
+	position: absolute;
+	z-index: -1;
+	width: 100%;
+	height: 80%;
+	filter: blur(var(--bg-item-blur));
+	opacity: 0.9;
+}
+
+.bg * {
+	backface-visibility: hidden;
+	transform-origin: 50% 50%;
+	transform-style: preserve-3d;
+	will-change: transform;
+}
+
+.bg::after {
+	position: relative;
+	display: block;
+	width: 22rem;
+	height: 38rem;
+	background: rgba(184, 184, 184, 0.08);
+	backdrop-filter: blur(8rem) saturate(1.6);
+	border-radius: 1.5rem;
+	z-index: 2;
+}
+
+.bg-item {
+	width: var(--bg-item-size);
+	height: calc(0.25 * var(--bg-item-size));
+	background-color: var(--bg-item-color-1);
+	border-radius: 100%;
+	opacity: var(--bg-item-opacity);
+	mix-blend-mode: multiply;
+	animation: bg-item ease-in-out var(--bg-item-speed-scale) infinite;
+}
+
+.bg> :nth-child(2) .bg-item {
+	background-color: var(--bg-item-color-2);
+	animation-delay: calc(-0.8 * var(--bg-item-speed-scale));
+}
+
+.bg> :nth-child(3) .bg-item {
+	background-color: var(--bg-item-color-3);
+	animation-delay: calc(-0.2 * var(--bg-item-speed-scale));
+}
+
+.bg-item-rotate {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	animation: bg-item-rotate linear var(--bg-item-speed-rotate) infinite alternate;
+}
+
+.bg-item-rotate:nth-child(2) {
+	animation-duration: calc(2 * var(--bg-item-speed-rotate));
+	animation-delay: calc(-1.5 * var(--bg-item-speed-rotate));
+}
+
+.bg-item-rotate:nth-child(3) {
+	animation-direction: alternate-reverse;
+	animation-duration: calc(0.8 * var(--bg-item-speed-rotate));
+	animation-delay: calc(-1 * var(--bg-item-speed-rotate));
+}
+
+.bg-item-move {
+	animation: bg-item-move ease-in-out var(--bg-item-speed-move) infinite;
+}
+
+.bg> :nth-child(2) .bg-item-move {
+	animation-delay: calc(-0.8 * var(--bg-item-speed-move));
+}
+
+.bg> :nth-child(3) .bg-item-move {
+	animation-delay: calc(-0.4 * var(--bg-item-speed-move));
+}
+
+@keyframes bg-item {
+
+	0%,
+	100% {
+		transform: scale(0.8, 2);
+	}
+
+	50% {
+		transform: scale(1.4, 0.8);
+	}
+}
+
+@keyframes bg-item-rotate {
+	0% {
+		transform: translate3d(-50%, -50%, 0) rotateZ(-28deg);
+		transform-origin: 50% 100%;
+	}
+
+	100% {
+		transform: translate3d(-50%, -50%, 0) rotateZ(28deg);
+		transform-origin: 50% 0%;
+	}
+}
+
+@keyframes bg-item-move {
+
+	0%,
+	100% {
+		transform: translateX(30%);
+	}
+
+	50% {
+		transform: translateX(-30%);
+	}
+}
+
+.nivel-opciones {
+	display: flex;
+	gap: 15px;
+	flex-wrap: wrap;
+	width: 340px;
+}
+
+.opcion-radio {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 5px 15px;
+	border: 1.5px solid white;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	font-weight: 500;
+	background-color: rgba(255, 255, 255, 0.05);
+	color: #fff;
+	user-select: none;
+	transform: scale(1);
+}
+
+.opcion-radio:hover {
+	background-color: rgba(255, 71, 69, 0.2);
+	transform: scale(1.05);
+}
+
+
+/* Headings */
+h3 {
+	font-size: 0.9rem;
+	margin-top: 18px;
+	margin-bottom: 9px;
+	color: #ffffff;
+}
+
+#result {
+	opacity: 0;
+	margin-top: 24px;
+}
+
+#result.active {
+	opacity: 1;
+	transition: opacity 0.5s ease-in;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}

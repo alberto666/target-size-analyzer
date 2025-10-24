@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Target Size Analyzer</title>
+    <link rel="stylesheet" href="styles/popup-styles.css">
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.svg" alt="Logo del Validador" id="logo">
+      <h1 class="sr-only">Target Size Analyzer</h1>
+    </header>
+    <main>
+      <section>
+        <h2>Select WCAG level</h2>
+        <div class="nivel-opciones">
+          <input type="radio" id="nivelAA" name="nivel" value="AA" checked>
+          <label for="nivelAA" class="opcion-radio">WCAG AA (24px)</label>
+          <input type="radio" id="nivelAAA" name="nivel" value="AAA">
+          <label for="nivelAAA" class="opcion-radio">WCAG AAA (48px)</label>
+        </div>
+      </section>
+      <section>
+        <h2>Custom selector</h2>
+        <label for="extraSelector" class="sr-only">Enter selectors separated by commas</label>
+        <input type="text" id="extraSelector" placeholder=".my-class, #my-id, [data-attr]" aria-label="Selector personalizado">
+      </section>
+      <section aria-labelledby="accionesTitle">
+        <h2 id="accionesTitle" class="sr-only">Validation actions</h2>
+        <button id="runCheck">Analyze</button>
+        <button id="resetCheck">Reset</button>
+      </section>
+      <section>
+        <div id="result" aria-live="polite">Results will appear here</div>
+      </section>
+    </main>
+    <footer class="logo-paradigma">
+      <a href="https://paradigmadigital.com" target="_blank">
+        <img src="images/logo-paradigma.svg" alt="Paradigma Digital logo">
+        <span class="sr-only">Visit Paradigma Digital website</span>
+      </a>
+    </footer>
+    <div class="bg" role="presentation">
+      <div class="bg-item-rotate">
+        <div class="bg-item-move">
+          <div class="bg-item"></div>
+        </div>
+      </div>
+      <div class="bg-item-rotate">
+        <div class="bg-item-move">
+          <div class="bg-item"></div>
+        </div>
+      </div>
+      <div class="bg-item-rotate">
+        <div class="bg-item-move">
+          <div class="bg-item"></div>
+        </div>
+      </div>
+    </div>
+    <script src="js/popup.js"></script>
+  </body>
+</html>
