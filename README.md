@@ -4,7 +4,7 @@ Highlight anchors, buttons, or other custom elements on screen that do not meet 
 
 Versions available for browsers based on Chromium and Mozilla Firefox
 
-![Target Size Analyzer screenshot](chrome/images/screenshot.png)
+![Target Size Analyzer screenshot](firefox/images/screenshot.png)
 
 This extension can be downloaded at the following stores:
 
